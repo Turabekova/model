@@ -1,16 +1,16 @@
 import pickle
-import string
 import streamlit as st
-import webbrowser
 
-global Lrdetect_Model
+# Modelni yuklash
+with open('model.pkl', 'rb') as LrdetectFile:
+    Lrdetect_Model = pickle.load(LrdetectFile)
 
-LrdetectFile = open('model.pkl','rb')
-Lrdetect_Model = pickle.load(LrdetectFile)
-LrdetectFile.close()
+# Streamlit interfeysi
 st.title("Tilni aniqlovchi dastur")
-input_test = st.text_input("Bu yerg text kiriting", 'Hello my name is Jamila ')
+input_test = st.text_input("Bu yerg text kiriting", 'Hello')
 
 button_clicked = st.button("Get Language Name")
 if button_clicked:
-	st.text(Lrdetect_Model.predict([input_test]))
+    # Predict natijasini chiqarish
+    st.write(Lrdetect_Model.predict([input_test]))
+
